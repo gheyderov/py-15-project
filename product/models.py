@@ -1,5 +1,9 @@
 from django.db import models
 from core.models import AbstracModel
+# from account.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 
 # Create your models here.
 
@@ -38,6 +42,17 @@ class Product(AbstracModel):
 class ProductImage(AbstracModel):
     image = models.ImageField(upload_to='product_images/')
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.product.title
+    
+
+class ProductReview(AbstracModel):
+
+    product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="reviews", on_delete=models.CASCADE)
+
+    message = models.TextField()
 
     def __str__(self):
         return self.product.title

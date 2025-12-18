@@ -6,11 +6,6 @@ from .models import Product
 def shop(request):
     products = Product.objects.all() # Django ORM
 
-
-
-
-
-
     context = {
         'products' : products
     }
