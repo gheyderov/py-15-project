@@ -34,9 +34,11 @@ class Product(AbstracModel):
     description = models.TextField(null=True, blank=True)
     cover_image = models.ImageField(upload_to='product_images/', null=True, blank=True)
 
-
     def __str__(self):
         return f'{self.category.title} / {self.title}'
+    
+    class Meta:
+        ordering = ("-created_at",)
     
 
 class ProductImage(AbstracModel):
