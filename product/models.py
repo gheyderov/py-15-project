@@ -16,12 +16,15 @@ class ProductTag(AbstracModel):
 
 class ProductCategory(AbstracModel):
 
+    parent = models.ForeignKey('self', related_name='child', null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
 
     class Meta:
         verbose_name_plural = 'Product Categories'
 
     def __str__(self):
+        if self.parent:
+            return f'{self.parent} / {self.title}'
         return self.title
     
 

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static tags %}
 
 {% block title %}
     <title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
@@ -76,7 +76,7 @@
                         <h2>{{product.title}}</h2>
                         <p class="price">${{product.price}}</p>
                         <p class="mb-4">
-                            {{product.description}}
+                            {{product.description | truncatewords:5}}
                         </p>
                         <!-- Add to Cart Form -->
                         <form action="#" class="row g-3">
@@ -153,6 +153,8 @@
             </div>
         </div>
     </section>
+
+{% show_recent_products %}
 
 {% endblock %}
    
