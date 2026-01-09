@@ -3,6 +3,37 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
+
+class ProfileForm(forms.ModelForm):
+
+    fullname = forms.CharField(max_length=200, widget= forms.TextInput(attrs={
+        'class' : 'form-control'
+    }))
+
+    class Meta:
+        model = User
+        fields = [
+            'email',
+            'phone'
+        ]
+        widgets = {
+            'email' : forms.EmailInput(attrs={
+                'class' : 'form-control'
+            }),
+            'phone' : forms.TextInput(attrs={
+                'class' : 'form-control'
+            }),
+        }
+
+    def save(self, commit = ...):
+        user = super().save(commit)
+        first_name = self.cleaned_data['fullname'].split()[0]
+        last_name = self.cleaned_data['fullname'].split()[1]
+        self.instance.first_name = first_name
+        self.instance.last_name = last_name
+        user.save()
+
+
 class LoginForm(forms.Form):
 
     username = forms.CharField(widget=forms.TextInput(attrs={

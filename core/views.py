@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from core.forms import ContactForm
 from django.contrib import messages
-
 # Create your views here.
 
 def homepage(request):
