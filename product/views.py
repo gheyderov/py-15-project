@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product, ProductCategory
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormMixin
+from product.forms import ReviewForm
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -38,6 +41,23 @@ def shop(request):
         'categories' : categories
     }
     return render(request, 'shop.html', context)
+
+
+class ShopDetailView(FormMixin, DetailView):
+    form_class = ReviewForm
+    model = Product # product
+    template_name = 'shop-detail.html'
+    success_url = reverse_lazy('home')
+    # context_object_name = 'productt'
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        product = self.get_object()
+        if form.is_valid():
+            form.instance.user = self.request.user
+            form.instance.product = product
+            form.save()
+        return self.get(request, *args, **kwargs)
 
 
 def shop_detail(request, pk):

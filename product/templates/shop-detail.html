@@ -133,22 +133,24 @@
 
                 <!-- Write a Review Section -->
                 <div class="col-lg-6">
+                    {% if request.user.is_authenticated %}
                     <h2 class="mb-4">Write a Review</h2>
-                    <form action="#" class="row g-3">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Your Name">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="email" class="form-control" placeholder="Your Email">
-                        </div>
+                    <form action="" class="row g-3" method="post">
+                        {% csrf_token %}
                         <div class="col-12">
-                            <textarea name="" id="" cols="30" rows="5" class="form-control"
-                                placeholder="Write your review"></textarea>
+                            <!-- <textarea name="" id="" cols="30" rows="5" class="form-control"
+                                placeholder="Write your review"></textarea> -->
+                                {{form.message}}
                         </div>
                         <div class="col-12">
                             <button class="btn btn-primary w-100">Submit Review</button>
                         </div>
+                        {% else %}
+                        <div class="col-12">
+                            <h4>You need to login for writing review <a href="{% url 'login' %}?next=/shop/{{product.slug}}">Login</a></h4>
+                        </div>
                     </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
