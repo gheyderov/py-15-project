@@ -17,7 +17,7 @@ class GetUserIpsMiddleware(MiddlewareMixin):
 
 
 class BlockUserMiddleware(MiddlewareMixin):
-    
+     
     def process_request(self, request):
         ip = request.META.get('REMOTE_ADDR')
         ip_addr = BlockedIpAddress.objects.filter(ip_address = ip)
