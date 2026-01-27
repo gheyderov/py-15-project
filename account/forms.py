@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 User = get_user_model()
-
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
 
 class ProfileForm(forms.ModelForm):
@@ -34,9 +34,9 @@ class ProfileForm(forms.ModelForm):
         user.save()
 
 
-class LoginForm(forms.Form):
+class LoginForm(AuthenticationForm):
 
-    username = forms.CharField(widget=forms.TextInput(attrs={
+    username = UsernameField(widget=forms.TextInput(attrs={
         'class' : 'form-control',
         'placeholder' : 'Username'
     }))

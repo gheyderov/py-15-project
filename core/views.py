@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from core.forms import ContactForm
 from django.contrib import messages
 from django.views.generic import CreateView
+from django.utils.translation import gettext_lazy as _
 
 # Create your views here.
 
@@ -20,7 +21,7 @@ class ContactView(CreateView):
     # context_object_name = 'form'
     
     def form_valid(self, form):
-        messages.add_message(self.request, messages.WARNING, "Successfully Sent!")
+        messages.add_message(self.request, messages.WARNING, _("Successfully Sent!"))
         return super().form_valid(form)
     
 
