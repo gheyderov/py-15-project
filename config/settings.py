@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'blog',
     'product',
     'order',
-    'rosetta'
+    'rosetta',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
