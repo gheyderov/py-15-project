@@ -4,12 +4,22 @@ from core.validators import validate_gmail
 # Create your models here.
 
 
+
+
 class AbstracModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
+
+
+
+class Subscribe(AbstracModel):
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.email
 
 
 class Contact(AbstracModel):
