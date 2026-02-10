@@ -9,7 +9,7 @@ from product.api.serializers import (
 )
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 class SubscriberAPIView(CreateAPIView):
     serializer_class = SubscribeSerializer
@@ -78,6 +78,7 @@ def product_update(request, pk):
 class ProductListAPIView(ListCreateAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_serializer_class(self):
         if self.request.method == "POST":
