@@ -6,10 +6,12 @@ from product.api.views import (
     ProductListAPIView,
     ProductUpdateDeleteAPIView,
     SubscriberAPIView,
+    ProductTagListAPIView
 )
 
 urlpatterns = [
     path("categories/", categories, name="categories"),
+    path('tags/', ProductTagListAPIView.as_view(), name = 'tags'),
     path("products/", ProductListAPIView.as_view(), name="products"),
     path(
         "product/<int:pk>/", ProductUpdateDeleteAPIView.as_view(), name="product_update"

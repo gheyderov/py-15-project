@@ -50,11 +50,13 @@ INSTALLED_APPS = [
     "rosetta",
     "rest_framework",
     'rest_framework_simplejwt',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -65,6 +67,7 @@ MIDDLEWARE = [
     # 'config.middleware.BlockUserMiddleware'
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 from django.contrib.messages import constants as messages
 
