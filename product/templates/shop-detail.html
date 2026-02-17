@@ -89,7 +89,7 @@
                                 <button class="btn btn-light"><span class="fa fa-heart"></span></button>
                                 
                                 <button type="submit" class="btn btn-primary">
-                                    <span class="fa fa-shopping-cart"></span> Add to Cart
+                                    <span class="fa fa-shopping-cart update-item" data-product="{{product.id}}" ></span> Add to Cart
                                 </button>
                             </div>
                         </form>
@@ -160,3 +160,7 @@
 
 {% endblock %}
    
+
+{% block js %}
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
