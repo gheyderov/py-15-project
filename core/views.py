@@ -4,8 +4,15 @@ from core.forms import ContactForm
 from django.contrib import messages
 from django.views.generic import CreateView
 from django.utils.translation import gettext_lazy as _
+from core.tasks import export
+from django.http import HttpResponse
 
 # Create your views here.
+
+def export_view(request):
+    export.delay()
+    return HttpResponse('Export Done!')
+
 
 def homepage(request):
     return render(request, 'index.html')

@@ -17,12 +17,12 @@ function getCookie(name) {
 }
 const csrftoken = getCookie('csrftoken');
 
-for (let i = 0; i < updateBtns.length; i ++){
-    updateBtns[i].addEventListener('click', function(event){
+for (let i = 0; i < updateBtns.length; i++) {
+    updateBtns[i].addEventListener('click', function (event) {
         event.preventDefault()
         productId = this.dataset.product
         action = this.dataset.action
-        
+
         console.log('Item added!', productId, action)
 
         let url = '/en/update-item/'
@@ -30,14 +30,19 @@ for (let i = 0; i < updateBtns.length; i ++){
         fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type' : 'application/json',
-                'X-CSRFToken' : csrftoken
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
             },
             body: JSON.stringify({
-                'productId' : productId,
-                'action' : action
+                'productId': productId,
+                'action': action
             })
+        }).then((response) => {
+            return response.json()
+        }).then((data) => {
+            console.log(data)
+            location.reload()
         })
-        
+
     })
 }

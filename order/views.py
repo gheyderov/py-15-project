@@ -24,7 +24,13 @@ def update_item(request):
         else:
             basketItem.quantity += 1
 
+    if action == 'remove':
+        basketItem.quantity -= 1
+
     basketItem.save()
+
+    if basketItem.quantity <= 0:
+        basketItem.delete()
 
     return JsonResponse('Item was added!', safe=False)
 
