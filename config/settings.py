@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "rest_framework",
     'rest_framework_simplejwt',
     'corsheaders',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +111,7 @@ DATABASES = {
         "USER": "user",
         "PASSWORD": 12345,
         "PORT": 5432,
-        "HOST": "localhost",  # ip4
+        "HOST": "db",  # ip4
     }
 }
 
@@ -204,3 +205,4 @@ SIMPLE_JWT = {
 
 CELERY_BROKER_URL = "redis://localhost:6379"
 CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
